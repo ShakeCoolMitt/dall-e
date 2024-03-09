@@ -5,6 +5,7 @@ import { UserButton } from "@clerk/nextjs";
 const LandingPage = () => {
   return (
     <div>
+      <UserButton />
       LandingPage
       <div>
         <Link href="/sign-in">
