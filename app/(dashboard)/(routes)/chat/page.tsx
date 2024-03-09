@@ -20,6 +20,11 @@ import { cn } from "@/lib/utils";
 import { formSchema } from "./constants";
 import OpenAI from "openai";
 import { ChatCompletionMessageParam } from "openai/resources/index.mjs";
+import { Empty } from "@/components/ui/Empty";
+import { Loader } from "@/components/ui/loader";
+import { UserAvatar } from "@/components/ui/user-avatar";
+import { BotAvatar } from "@/components/bot-avatar";
+
 const ConversationPage = () => {
   const router = useRouter();
   const [messages, setMessages] = useState<ChatCompletionMessageParam[]>([]);
@@ -39,18 +44,18 @@ const ConversationPage = () => {
         role: "user",
         content: values.prompt,
       };
-
       const newMessages = [...messages, userMessage];
 
       const response = await axios.post("/api/conversation", {
         messages: newMessages,
       });
-
       setMessages((current) => [...current, userMessage, response.data]);
 
       form.reset();
     } catch (error: any) {
-      console.log(error);
+      if (error?.response?.status === 403) {
+      } else {
+      }
     } finally {
       router.refresh();
     }
@@ -59,11 +64,11 @@ const ConversationPage = () => {
   return (
     <div>
       <Heading
-        title="Chat"
+        title="Conversation"
         description="Our most advanced conversation model."
-        icon={MessageCircle}
-        iconColor="text-sky-500"
-        bgColor="bg-sky-500/10"
+        icon={MessageSquare}
+        iconColor="text-violet-500"
+        bgColor="bg-violet-500/10"
       />
       <div className="px-4 lg:px-8">
         <div>
@@ -91,7 +96,7 @@ const ConversationPage = () => {
                       <Input
                         className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
                         disabled={isLoading}
-                        placeholder="Generate a SVG Icon of a company logo?"
+                        placeholder="Type your message here..."
                         {...field}
                       />
                     </FormControl>
@@ -104,26 +109,47 @@ const ConversationPage = () => {
                 disabled={isLoading}
                 size="icon"
               >
-                Chat
+                Generate
               </Button>
             </form>
           </Form>
         </div>
-        <div className="flex flex-col-reverse gap-y-4">
-          {messages.map((message, index) => (
-            <div key={index}>
-              {Array.isArray(message.content)
-                ? message.content.map((part, partIndex) => {
-                    if ("text" in part) {
-                      return <span key={partIndex}>{part.text}</span>;
-                    } else {
-                      // Handle 'ChatCompletionContentPartImage' case here
-                      return null;
-                    }
-                  })
-                : message.content}
+        <div className="space-y-4 mt-4">
+          {isLoading && (
+            <div className="p-8 rounded-lg w-full flex items-center justify-center bg-muted">
+              <Loader />
             </div>
-          ))}
+          )}
+          {messages.length === 0 && !isLoading && (
+            <Empty label="No conversation started." />
+          )}
+          <div className="flex flex-col-reverse gap-y-4">
+            {messages.map((message, index) => (
+              <div
+                key={index}
+                className={cn(
+                  "p-8 w-full flex items-start gap-x-8 rounded-lg",
+                  message.role === "user"
+                    ? "bg-white border border-black/10"
+                    : "bg-muted"
+                )}
+              >
+                {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
+                <p>
+                  {Array.isArray(message.content)
+                    ? message.content.map((part, partIndex) => {
+                        if ("text" in part) {
+                          return <span key={partIndex}>{part.text}</span>;
+                        } else {
+                          // Handle 'ChatCompletionContentPartImage' case here
+                          return null;
+                        }
+                      })
+                    : message.content}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
