@@ -58,7 +58,7 @@ const Sidebar = () => {
         >
           AI-Driven SVG Icon Generation
         </div>
-        <div space-y-1>
+        <div className="space-y-1">
           {routes.map((route) => (
             <Link
               className={cn(
