@@ -22,7 +22,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
 
-import { amountOptions, formSchema, resOptions } from "./constants";
+import {
+  amountOptions,
+  formSchema,
+  resOptions,
+  styleOptions,
+} from "./constants";
 
 import { Empty } from "@/components/ui/Empty";
 import { Loader } from "@/components/ui/loader";
@@ -48,6 +53,7 @@ const ImagePage = () => {
       prompt: "",
       amount: "1",
       resolution: "512x512",
+      styleOptions: styleOptions[2].value,
     },
   });
 
@@ -58,13 +64,12 @@ const ImagePage = () => {
       setImages([]);
 
       const response = await axios.post("/api/svg", values);
-      // console.log('FULL RE:', response)
+
       const urls = response.data;
       setImages(urls);
       console.log(urls);
       form.reset();
     } catch (error: any) {
-      // TODO: Open Pro Modal
       console.log(error);
     } finally {
       router.refresh();
@@ -169,6 +174,34 @@ const ImagePage = () => {
                   </FormItem>
                 )}
               />
+              <FormField
+                control={form.control}
+                name="styleOptions"
+                render={({ field }) => (
+                  <FormItem className="col-span-12 lg:col-span-6">
+                    <Select
+                      disabled={isLoading}
+                      onValueChange={field.onChange}
+                      value={field.value}
+                      defaultValue={field.value}
+                    >
+                      <FormControl className="m-0 p-2">
+                        <SelectTrigger>
+                          <SelectValue defaultValue={field.value} />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {styleOptions.map((option) => (
+                          <SelectItem key={option.value} value={option.value}>
+                            {option.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </FormItem>
+                )}
+              />
+
               <Button
                 className="col-span-12 lg:col-span-2 w-full"
                 type="submit"

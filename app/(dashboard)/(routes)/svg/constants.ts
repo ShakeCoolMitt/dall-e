@@ -7,6 +7,7 @@ export const formSchema = z.object({
   }),
   amount: z.string().min(1),
   resolution: z.string().min(1),
+  styleOptions: z.string().min(1),
 });
 
 export const amountOptions = [
@@ -29,5 +30,24 @@ export const resOptions = [
   {
     value: "1024x1024",
     Label: "1024x1024",
+  },
+];
+
+const metallicPrompt = `a high quality icon of metallic iridescent material, 3D render isometric perspective on a dark background`;
+const watercolorPrompt = `a watercolor-style icon on a dark background, with a soft accent and a dreamy feel`;
+const popPrompt = `a pop art-style icon on a dark background, with bold colors and graphic design elements that pop`;
+
+export const styleOptions = [
+  {
+    value: metallicPrompt,
+    label: "metallic",
+  },
+  {
+    value: popPrompt,
+    label: "pop",
+  },
+  {
+    value: watercolorPrompt,
+    label: "watercolor",
   },
 ];
