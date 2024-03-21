@@ -18,7 +18,7 @@ import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
 
 import { formSchema } from "./constants";
-import OpenAI from "openai";
+
 import { ChatCompletionMessageParam } from "openai/resources/index.mjs";
 import { Empty } from "@/components/ui/Empty";
 import { Loader } from "@/components/ui/loader";
