@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Montserrat } from "next/font/google";
 import { cn } from "@/lib/utils";
 import {
+  Code,
   ImageIcon,
   LayoutDashboard,
   MessageCircle,
@@ -36,6 +37,12 @@ const routes = [
     href: "/svg",
     color: "text-emerald-500",
   },
+  // {
+  //   label: "Code Generation",
+  //   icon: Code,
+  //   href: "/code",
+  //   color: "text-pink-500",
+  // },
   {
     label: "Settings",
     icon: Settings2Icon,
