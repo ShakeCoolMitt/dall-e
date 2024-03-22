@@ -42,10 +42,13 @@ import {
 } from "@/components/ui/select";
 import { Card, CardFooter } from "@/components/ui/card";
 import Image from "next/image";
+import ColorPicker from "@/components/ColorPicker";
+import { colorOptions } from "./constants";
 
 const ImagePage = () => {
   const router = useRouter();
   const [images, setImages] = useState<string[]>([]);
+  const [color, setColor] = useState("");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -62,8 +65,10 @@ const ImagePage = () => {
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setImages([]);
+      const updatedPrompt = `${color} ${values.styleOptions} ${values.prompt}`;
+      const updatedValues = { ...values, prompt: updatedPrompt };
 
-      const response = await axios.post("/api/svg", values);
+      const response = await axios.post("/api/svg", updatedValues);
 
       const urls = response.data;
       setImages(urls);
@@ -82,8 +87,8 @@ const ImagePage = () => {
         title="Image Generation"
         description="Generate images from text prompts."
         icon={ImageIcon}
-        iconColor="text-violet-500"
-        bgColor="bg-violet-500/10"
+        iconColor="text-pink-500"
+        bgColor="bg-pink-500/10"
       />
       <div className="px-4 lg:px-8">
         <div>
@@ -147,6 +152,17 @@ const ImagePage = () => {
                   </FormItem>
                 )}
               />
+              <div className="grid grid-cols-2 gap-y-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7">
+                {colorOptions.map((option) => (
+                  <ColorPicker
+                    key={option}
+                    option={option}
+                    color={color}
+                    setColor={setColor}
+                  />
+                ))}
+              </div>
+
               <FormField
                 control={form.control}
                 name="resolution"
