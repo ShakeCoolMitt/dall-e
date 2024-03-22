@@ -7,10 +7,10 @@ import Link from "next/link";
 import { UserButton } from "@clerk/nextjs";
 
 const navigation = [
-  { name: "Product", href: "#" },
-  { name: "Features", href: "#" },
-  { name: "Marketplace", href: "#" },
-  { name: "Company", href: "#" },
+  { name: "Product", href: "/dashboard" },
+  { name: "Features", href: "/dashboard" },
+  { name: "Marketplace", href: "/dashboard" },
+  { name: "Company", href: "/dashboard" },
 ];
 
 export default function Example() {
@@ -25,8 +25,8 @@ export default function Example() {
         >
           <div className="flex lg:flex-1">
             {/* <a href="#" className="-m-1.5 p-1.5"> */}
-              <span className="sr-only">Your Company</span>
-              <UserButton />
+            <span className="sr-only">VectoAi</span>
+            <UserButton />
 
             {/* </a> */}
           </div>
@@ -66,8 +66,7 @@ export default function Example() {
           <div className="fixed inset-0 z-50" />
           <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
-
-                <UserButton />
+              <UserButton />
 
               <button
                 type="button"
@@ -119,7 +118,6 @@ export default function Example() {
           />
         </div>
         <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
-         
           <div className="text-center">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
               Your ideas into reality
@@ -128,8 +126,18 @@ export default function Example() {
               Use AI to create high quality SVG images from prompts
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              <Link className="text-sm font-semibold leading-6 text-gray-900" href="/sign-up">Get started</Link>
-              <Link className="text-sm font-semibold leading-6 text-gray-900" href="/sign-up">Learn More  <span aria-hidden="true">→</span></Link>
+              <Link
+                className="text-sm font-semibold leading-6 text-gray-900"
+                href="/sign-up"
+              >
+                Get started
+              </Link>
+              <Link
+                className="text-sm font-semibold leading-6 text-gray-900"
+                href="/sign-up"
+              >
+                Learn More <span aria-hidden="true">→</span>
+              </Link>
             </div>
           </div>
         </div>
