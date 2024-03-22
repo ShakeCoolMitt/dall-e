@@ -51,3 +51,15 @@ export const styleOptions = [
     label: "watercolor",
   },
 ];
+export const colorOptions = [
+  "red",
+  "blue",
+  "green",
+  "indigo",
+  "purple",
+  "orange",
+  "pink",
+  "white",
+  "black",
+  "lime",
+];

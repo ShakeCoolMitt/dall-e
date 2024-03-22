@@ -26,17 +26,18 @@ const routes = [
     color: "text-sky-500",
   },
   {
+    label: "Icon Generation",
+    icon: ImageIcon,
+    href: "/svg",
+    color: "text-pink-500",
+  },
+  {
     label: "Chat",
     icon: MessageCircle,
     href: "/chat",
     color: "text-violet-500",
   },
-  {
-    label: "SVG Generation",
-    icon: ImageIcon,
-    href: "/svg",
-    color: "text-emerald-500",
-  },
+
   // {
   //   label: "Code Generation",
   //   icon: Code,
@@ -63,7 +64,7 @@ const Sidebar = () => {
         <div
           className={cn("text-sm font-semibold pb-10", montserrat.className)}
         >
-          AI-Driven SVG Icon Generation
+          AI-Driven Custom Icon Generation
         </div>
         <div className="space-y-1">
           {routes.map((route) => (

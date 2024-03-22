@@ -1,6 +1,5 @@
 "use client";
 
-
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { UserButton } from "@clerk/nextjs";
@@ -12,7 +11,7 @@ const DashboardPage = () => {
     <div>
       <Heading
         title="Dashboard"
-        description="Our most advanced conversation model."
+        description="Check out your latest image generations"
         icon={MessageSquare}
         iconColor="text-violet-500"
         bgColor="bg-violet-500/10"
