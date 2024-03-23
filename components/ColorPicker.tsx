@@ -8,7 +8,7 @@ const ColorPicker: React.FC<Props> = ({ option, setColor, color }) => {
     <div className="flex items-center">
       <label className="flex flex-col text-center">
         <input
-          className="mb-2 h-28 w-28 cursor-pointer appearance-none rounded-lg opacity-20 checked:scale-110 checked:opacity-100"
+          className="border-[2px] border-zinc-500 mb-2 h-28 w-28 cursor-pointer appearance-none rounded-lg opacity-20 checked:scale-110 checked:opacity-100"
           style={{ backgroundColor: option }}
           type="radio"
           name="color"
