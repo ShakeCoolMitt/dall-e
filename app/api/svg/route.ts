@@ -2,6 +2,8 @@ import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import { OpenAI } from "openai";
 
+import { increaseApiLimit, getApiLimit } from "@/lib/api-limit";
+
 const openai = new OpenAI({
   apiKey: process.env.OPEN_API_KEY,
 });
@@ -26,6 +28,14 @@ export async function POST(req: Request) {
       return new NextResponse("Prompt is required", { status: 400 });
     }
 
+    const freeUser = await getApiLimit();
+
+    if (!freeUser) {
+      return new NextResponse("You have reached your free limit", {
+        status: 403,
+      });
+    }
+
     const numAmount = parseInt(amount, 10);
     if (isNaN(numAmount) || numAmount < 1) {
       return new NextResponse("Invalid amount", { status: 400 });
@@ -37,6 +47,8 @@ export async function POST(req: Request) {
       n: numAmount,
       size: resolution,
     });
+
+    await increaseApiLimit();
 
     // Log the entire response for debugging
     console.log("OpenAI API Response:", response);
