@@ -44,9 +44,11 @@ import { Card, CardFooter } from "@/components/ui/card";
 import Image from "next/image";
 import ColorPicker from "@/components/ColorPicker";
 import { colorOptions } from "./constants";
+import { useProModal } from "@/hooks/use-pro-modal";
 
 const ImagePage = () => {
   const router = useRouter();
+  const proModal = useProModal();
   const [images, setImages] = useState<string[]>([]);
   const [color, setColor] = useState("");
 
@@ -75,7 +77,10 @@ const ImagePage = () => {
       console.log(urls);
       form.reset();
     } catch (error: any) {
-      console.log(error);
+      if (error?.response?.status === 403) {
+        proModal.onOpen();
+      } else {
+      }
     } finally {
       router.refresh();
     }

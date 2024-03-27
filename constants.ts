@@ -1,1 +1,1 @@
-export const MAX_FREE_USES = 5;
+export const MAX_FREE_USES = 100;
