@@ -10,7 +10,7 @@ const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
     <div className="h-full relative">
       <div
         className="hidden h-full md:flex md:w-50
-      md:flex-col md:fixed md:inset-y-0 z-[80] md:px-4 bg-slate-900"
+      md:flex-col md:fixed md:inset-y-0 md:px-4 bg-slate-900"
       >
         <Sidebar apiLimitCount={apiLimitCount} />
       </div>
