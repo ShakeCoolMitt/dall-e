@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { OpenAI } from "openai";
 
 import { increaseApiLimit, getApiLimit } from "@/lib/api-limit";
+import { checkSubscription } from "@/lib/subscription";
 
 const openai = new OpenAI({
   apiKey: process.env.OPEN_API_KEY,
@@ -30,7 +31,9 @@ export async function POST(req: Request) {
 
     const freeUser = await getApiLimit();
 
-    if (!freeUser) {
+    const isPro = await checkSubscription();
+
+    if (!freeUser && !isPro) {
       return new NextResponse("You have reached your free limit", {
         status: 403,
       });
@@ -48,7 +51,9 @@ export async function POST(req: Request) {
       size: resolution,
     });
 
-    await increaseApiLimit();
+    if (!isPro) {
+      await increaseApiLimit();
+    }
 
     // Log the entire response for debugging
     console.log("OpenAI API Response:", response);

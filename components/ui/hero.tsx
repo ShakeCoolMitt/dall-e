@@ -7,10 +7,10 @@ import Link from "next/link";
 import { UserButton } from "@clerk/nextjs";
 
 const navigation = [
-  { name: "Product", href: "/dashboard" },
-  { name: "Features", href: "/dashboard" },
-  { name: "Marketplace", href: "/dashboard" },
-  { name: "Company", href: "/dashboard" },
+  { name: "Product", href: "/svg" },
+  { name: "Features", href: "/svg" },
+  { name: "Marketplace", href: "/svg" },
+  { name: "Company", href: "/svg" },
 ];
 
 export default function Example() {

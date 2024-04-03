@@ -22,23 +22,23 @@ const montserrat = Montserrat({
 
 const routes = [
   {
-    label: "Dashboard",
-    icon: LayoutDashboard,
-    href: "/dashboard",
-    color: "text-sky-500",
-  },
-  {
     label: "Icon Generation",
     icon: ImageIcon,
     href: "/svg",
     color: "text-pink-500",
   },
   {
-    label: "Chat",
-    icon: MessageCircle,
-    href: "/chat",
-    color: "text-violet-500",
+    label: "Dashboard",
+    icon: LayoutDashboard,
+    href: "/dashboard",
+    color: "text-sky-500",
   },
+  // {
+  //   label: "Chat",
+  //   icon: MessageCircle,
+  //   href: "/chat",
+  //   color: "text-violet-500",
+  // },
 
   // {
   //   label: "Code Generation",
@@ -56,14 +56,15 @@ const routes = [
 
 interface SidebarProps {
   apiLimitCount: number;
+  isPro: boolean;
 }
 
-const Sidebar = ({ apiLimitCount = 0 }: SidebarProps) => {
+const Sidebar = ({ apiLimitCount = 0, isPro = false }: SidebarProps) => {
   const pathname = usePathname();
   return (
     <div className="space-y-4 py-4 flex flex-col h-full bg-[#111827] text-white">
       <div className="px-3 py-2 flex-1">
-        <Link href="/dashboard" className="flex items-center pl-3 mb-14">
+        <Link href="/svg" className="flex items-center pl-3 mb-14">
           <div className="relative w-40 h-40 flex justify-center items-center">
             <Image fill alt="Logo" src="/logo.png" />
           </div>
@@ -93,7 +94,7 @@ const Sidebar = ({ apiLimitCount = 0 }: SidebarProps) => {
           ))}
         </div>
       </div>
-      <FreeCounter apiLimitCount={apiLimitCount} />
+      <FreeCounter isPro={isPro} apiLimitCount={apiLimitCount} />
     </div>
   );
 };

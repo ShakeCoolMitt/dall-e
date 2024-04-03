@@ -44,11 +44,15 @@ import { Card, CardFooter } from "@/components/ui/card";
 import Image from "next/image";
 import ColorPicker from "@/components/ColorPicker";
 import { colorOptions } from "./constants";
+import { useProModal } from "@/hooks/use-pro-modal";
+import StylePicker from "@/components/StylePicker";
 
 const ImagePage = () => {
   const router = useRouter();
+  const proModal = useProModal();
   const [images, setImages] = useState<string[]>([]);
   const [color, setColor] = useState("");
+  const [style, setStyleOptions] = useState(styleOptions[2].value);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -75,7 +79,10 @@ const ImagePage = () => {
       console.log(urls);
       form.reset();
     } catch (error: any) {
-      console.log(error);
+      if (error?.response?.status === 403) {
+        proModal.onOpen();
+      } else {
+      }
     } finally {
       router.refresh();
     }
@@ -201,7 +208,7 @@ const ImagePage = () => {
                       value={field.value}
                       defaultValue={field.value}
                     >
-                      <FormControl className="m-0 p-2">
+                      <FormControl className="m-0 p-2 h-full">
                         <SelectTrigger>
                           <SelectValue defaultValue={field.value} />
                         </SelectTrigger>
@@ -210,6 +217,13 @@ const ImagePage = () => {
                         {styleOptions.map((option) => (
                           <SelectItem key={option.value} value={option.value}>
                             {option.label}
+                            <Image
+                              className="rounded-md "
+                              src={option.imageSrc}
+                              alt={option.label}
+                              width={150}
+                              height={150}
+                            />
                           </SelectItem>
                         ))}
                       </SelectContent>

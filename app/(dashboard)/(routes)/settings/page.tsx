@@ -1,15 +1,28 @@
 import { Heading } from "@/components/heading";
 import { Settings2Icon } from "lucide-react";
+import { checkSubscription } from "@/lib/subscription";
+import { SubscriptionButton } from "@/components/subscription-button";
 
-const Settings = () => {
+const Settings = async () => {
+  const isPro = await checkSubscription();
   return (
-    <Heading
-      title="Setting"
-      description="Settings"
-      icon={Settings2Icon}
-      iconColor="text-violet-500"
-      bgColor="bg-violet-500/10"
-    />
+    <div>
+      <Heading
+        title="Setting"
+        description="Manage your account settings and subscriptions."
+        icon={Settings2Icon}
+        iconColor="text-violet-500"
+        bgColor="bg-violet-500/10"
+      />
+      <div className="px-4 lg:px-8 space-y-4">
+        <div className="text-muted-foreground text-sm">
+          {isPro
+            ? "You are subscribed to Pro"
+            : "You are currently on the free plan. Upgrade to Pro to unlock additional features."}
+        </div>
+        <SubscriptionButton isPro={isPro} />
+      </div>
+    </div>
   );
 };
 
