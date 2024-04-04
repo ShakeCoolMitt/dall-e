@@ -45,7 +45,6 @@ import Image from "next/image";
 import ColorPicker from "@/components/ColorPicker";
 import { colorOptions } from "./constants";
 import { useProModal } from "@/hooks/use-pro-modal";
-import StylePicker from "@/components/StylePicker";
 
 const ImagePage = () => {
   const router = useRouter();
