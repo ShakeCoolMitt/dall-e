@@ -4,17 +4,17 @@ import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { UserButton } from "@clerk/nextjs";
+import { UserButton, useUser } from "@clerk/nextjs";
 
 const navigation = [
-  { name: "Product", href: "/svg" },
-  { name: "Features", href: "/svg" },
-  { name: "Marketplace", href: "/svg" },
-  { name: "Company", href: "/svg" },
+  { name: "Generate new Icons", href: "/svg" },
+  { name: "Try Free now", href: "/svg" },
+  { name: "Subscribe", href: "/svg" },
 ];
 
 export default function Example() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { isSignedIn } = useUser();
 
   return (
     <div className="bg-white">
@@ -120,25 +120,42 @@ export default function Example() {
         <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
           <div className="text-center">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-              Your ideas into reality
+              VectoAI
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              Use AI to create high quality SVG images from prompts
+              Use AI to create high quality Icons from prompts
             </p>
-            <div className="mt-10 flex items-center justify-center gap-x-6">
-              <Link
-                className="text-sm font-semibold leading-6 text-gray-900"
-                href="/sign-up"
-              >
-                Get started
-              </Link>
-              <Link
-                className="text-sm font-semibold leading-6 text-gray-900"
-                href="/sign-up"
-              >
-                Learn More <span aria-hidden="true">→</span>
-              </Link>
-            </div>
+            {!isSignedIn ? (
+              <div className="mt-10 flex justify-center gap-x-6">
+                <Link
+                  href="/sign-up"
+                  className="text-sm font-semibold text-gray-900"
+                >
+                  Get started
+                </Link>
+                <Link
+                  href="/sign-up"
+                  className="text-sm font-semibold text-gray-900"
+                >
+                  Learn More →
+                </Link>
+              </div>
+            ) : (
+              <div className="mt-10 flex justify-center gap-x-6">
+                <Link
+                  href="/svg"
+                  className="text-sm font-semibold text-gray-900"
+                >
+                  Make Icons
+                </Link>
+                <Link
+                  href="/svg"
+                  className="text-sm font-semibold text-gray-900"
+                >
+                  Generate New →
+                </Link>
+              </div>
+            )}
           </div>
         </div>
         <div
