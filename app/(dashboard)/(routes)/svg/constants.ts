@@ -56,60 +56,80 @@ const handDrawnCharmingPrompt = `A charming, hand-drawn style icon that exudes w
 
 const elegantLuxuryPrompt = `An elegant and luxurious icon, incorporating refined design elements and a palette of rich, sophisticated colors, showcased against a dark, sumptuous background for an aura of exclusivity.`;
 
-export const styleOptions = [
+interface IconStyleOption {
+  value: string;
+  label: string;
+  imageSrc: string;
+}
+
+export const styleOptions: IconStyleOption[] = [
   {
     value: metallicPrompt,
     label: "Metallic Original",
+    imageSrc: "/images/metallic.png",
   },
   {
     value: watercolorPrompt,
     label: "Watercolor Classic",
+    imageSrc: "/images/watercolor.png",
   },
   {
     value: popPrompt,
     label: "Pop Art",
+    imageSrc: "/images/pop.png",
   },
   {
     value: metallicIridescentPrompt,
     label: "Metallic Iridescent",
+    imageSrc: "/images/metallic.png",
   },
   {
     value: watercolorDreamyPrompt,
     label: "Watercolor Dreamy",
+    imageSrc: "/images/watercolor.png",
   },
   {
     value: popArtVibrantPrompt,
     label: "Pop Art Vibrant",
+    imageSrc: "/images/pop.png",
   },
   {
     value: neonGlowPrompt,
     label: "Neon Glow",
+    imageSrc: "/images/neon.png",
   },
   {
     value: vintageRetroPrompt,
     label: "Vintage Retro",
+    imageSrc: "/images/vintage.png",
   },
   {
     value: futuristicTechPrompt,
     label: "Futuristic Tech",
+    imageSrc: "/images/tech.png",
   },
   {
     value: minimalistModernPrompt,
     label: "Minimalist Modern",
+    imageSrc: "/images/minimalist.png",
   },
   {
     value: abstractGeometricPrompt,
     label: "Abstract Geometric",
+    imageSrc: "/images/abstract.png",
   },
   {
     value: handDrawnCharmingPrompt,
     label: "Hand Drawn Charming",
+    imageSrc: "/images/handDrawn.png",
   },
   {
     value: elegantLuxuryPrompt,
     label: "Elegant Luxury",
+    imageSrc: "/images/elegant.png",
   },
 ];
+
 export const colorOptions = [
   "red",
   "blue",

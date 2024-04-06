@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Dialog,
   DialogContent,
@@ -10,9 +9,24 @@ import { useProModal } from "@/hooks/use-pro-modal";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Clock, HelpCircle, Infinity } from "lucide-react";
+import axios from "axios";
+import { useState } from "react";
 
 const ProModal = () => {
   const proModal = useProModal();
+  const [loading, setLoading] = useState(false);
+  const onSubscribe = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get("/api/stripe");
+
+      window.location.href = response.data.url;
+    } catch (error) {
+      console.error(error, "Error subscribing to Pro");
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <Dialog open={proModal.isOpen} onOpenChange={proModal.onClose}>
       <DialogContent>
@@ -72,7 +86,9 @@ const ProModal = () => {
                 </div>
                 <div className="flex justify-end space-x-4 pt-5">
                   <Button variant="outline">Cancel</Button>
-                  <Button>Upgrade to Pro</Button>
+                  <Button disabled={loading} onClick={onSubscribe}>
+                    Upgrade to Pro
+                  </Button>
                 </div>
               </div>
             </div>

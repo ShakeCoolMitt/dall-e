@@ -51,6 +51,7 @@ const ImagePage = () => {
   const proModal = useProModal();
   const [images, setImages] = useState<string[]>([]);
   const [color, setColor] = useState("");
+  const [style, setStyleOptions] = useState(styleOptions[2].value);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -206,7 +207,7 @@ const ImagePage = () => {
                       value={field.value}
                       defaultValue={field.value}
                     >
-                      <FormControl className="m-0 p-2">
+                      <FormControl className="m-0 p-2 h-full">
                         <SelectTrigger>
                           <SelectValue defaultValue={field.value} />
                         </SelectTrigger>
@@ -215,6 +216,13 @@ const ImagePage = () => {
                         {styleOptions.map((option) => (
                           <SelectItem key={option.value} value={option.value}>
                             {option.label}
+                            <Image
+                              className="rounded-md "
+                              src={option.imageSrc}
+                              alt={option.label}
+                              width={150}
+                              height={150}
+                            />
                           </SelectItem>
                         ))}
                       </SelectContent>

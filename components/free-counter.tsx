@@ -8,13 +8,15 @@ import { Button } from "./ui/button";
 import { KeyRoundIcon } from "lucide-react";
 import { useProModal } from "@/hooks/use-pro-modal";
 
-interface FreeCounterProps {
+export const FreeCounter = ({
+  isPro = false,
+  apiLimitCount = 0,
+}: {
+  isPro: boolean;
   apiLimitCount: number;
-}
-
-export const FreeCounter = ({ apiLimitCount = 0 }: FreeCounterProps) => {
-  const proModal = useProModal();
+}) => {
   const [mounted, setMounted] = useState(false);
+  const proModal = useProModal();
 
   useEffect(() => {
     setMounted(true);
@@ -23,6 +25,11 @@ export const FreeCounter = ({ apiLimitCount = 0 }: FreeCounterProps) => {
   if (!mounted) {
     return null;
   }
+
+  if (isPro) {
+    return null;
+  }
+
   return (
     <div className="px-3">
       <Card className="bg-white/10 border-0">
