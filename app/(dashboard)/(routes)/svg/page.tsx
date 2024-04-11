@@ -9,6 +9,8 @@ import {
   ImageIcon,
   MessageCircle,
   MessageSquare,
+  Palette,
+  Scaling,
 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
@@ -45,6 +47,7 @@ import Image from "next/image";
 import ColorPicker from "@/components/ColorPicker";
 import { colorOptions } from "./constants";
 import { useProModal } from "@/hooks/use-pro-modal";
+import { PaintBrushIcon } from "@heroicons/react/24/outline";
 
 const ImagePage = () => {
   const router = useRouter();
@@ -96,8 +99,33 @@ const ImagePage = () => {
         iconColor="text-pink-500"
         bgColor="bg-pink-500/10"
       />
+
       <div className="px-4 lg:px-8">
         <div>
+          <div className="rounded-md p-4 ">
+            <h2 className="text-xl font-bold text-gray-900 mb-4">
+              Create Your Icon
+            </h2>
+            <p className="text-gray-700 mb-3">
+              Your icon outcomes might differ as we continue refining the
+              styles. Below are a few tips to help you create more effective
+              icons:
+            </p>
+            <ul className="list-disc list-inside space-y-2">
+              <li>Keep your prompts simple for optimal results.</li>
+              <li>
+                Avoid including text or characters; AI struggles with rendering
+                these accurately.
+              </li>
+              <li>
+                Once you find an icon you like, try using variations of it.
+              </li>
+              <li>
+                Incorporate descriptive words like happy or vibrant to refine
+                your results.
+              </li>
+            </ul>
+          </div>
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
@@ -120,11 +148,15 @@ const ImagePage = () => {
                 name="prompt"
                 render={({ field }) => (
                   <FormItem className="col-span-12 lg:col-span-6">
+                    <div className="text-xl text-primary font-semibold">
+                      1. Describe your new icon using a noun and adjective
+                      <MessageSquare className="w-6 h-6 mr-2" />
+                    </div>
                     <FormControl className="m-0 p-0">
                       <Input
-                        className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
+                        className="outline-none focus-visible:ring-0 focus-visible:ring-transparent"
                         disabled={isLoading}
-                        placeholder="Enter a prompt for your image"
+                        placeholder="Example: happy cat"
                         {...field}
                       />
                     </FormControl>
@@ -142,6 +174,10 @@ const ImagePage = () => {
                       value={field.value}
                       defaultValue={field.value}
                     >
+                      <div className="text-xl text-primary font-semibold">
+                        2. How many images do you want to generate?
+                        <ImageIcon className="w-6 h-6 mr-2" />
+                      </div>
                       <FormControl className="m-0 p-2">
                         <SelectTrigger>
                           <SelectValue defaultValue={field.value} />
@@ -155,18 +191,25 @@ const ImagePage = () => {
                         ))}
                       </SelectContent>
                     </Select>
+                    <div className="text-xl text-primary font-semibold">
+                      3. Choose a color for your icon
+                    </div>
+                    <PaintBrushIcon className="w-6 h-6 mr-2" />
                   </FormItem>
                 )}
               />
-              <div className="grid grid-cols-2 gap-y-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7">
-                {colorOptions.map((option) => (
-                  <ColorPicker
-                    key={option}
-                    option={option}
-                    color={color}
-                    setColor={setColor}
-                  />
-                ))}
+
+              <div>
+                <div className="grid grid-cols-2 gap-y-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7">
+                  {colorOptions.map((option) => (
+                    <ColorPicker
+                      key={option}
+                      option={option}
+                      color={color}
+                      setColor={setColor}
+                    />
+                  ))}
+                </div>
               </div>
 
               <FormField
@@ -180,6 +223,12 @@ const ImagePage = () => {
                       value={field.value}
                       defaultValue={field.value}
                     >
+                      <div className="text-xl text-primary font-semibold">
+                        4. What would you like the resolution of the images to
+                        be?
+                        <Scaling className="w-6 h-6 mr-2" />
+                      </div>
+
                       <FormControl className="m-0 p-2">
                         <SelectTrigger>
                           <SelectValue defaultValue={field.value} />
@@ -200,13 +249,17 @@ const ImagePage = () => {
                 control={form.control}
                 name="styleOptions"
                 render={({ field }) => (
-                  <FormItem className="col-span-12 lg:col-span-6">
+                  <FormItem className="col-span-12 lg:col-span-6 pb-10">
                     <Select
                       disabled={isLoading}
                       onValueChange={field.onChange}
                       value={field.value}
                       defaultValue={field.value}
                     >
+                      <div className="text-xl text-primary font-semibold">
+                        5. Choose a style for your icon
+                        <Palette className="w-6 h-6 mr-2" />
+                      </div>
                       <FormControl className="m-0 p-2 h-full">
                         <SelectTrigger>
                           <SelectValue defaultValue={field.value} />
