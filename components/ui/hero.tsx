@@ -9,7 +9,7 @@ import { UserButton, useUser } from "@clerk/nextjs";
 const navigation = [
   { name: "Generate new Icons", href: "/svg" },
   { name: "Try Free now", href: "/svg" },
-  { name: "Subscribe", href: "/svg" },
+  { name: "Features", href: "/features" },
 ];
 
 export default function Example() {
