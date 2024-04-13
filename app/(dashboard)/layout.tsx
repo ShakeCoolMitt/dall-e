@@ -1,3 +1,4 @@
+import FooterBar from "@/components/footerBar";
 import Navbar from "@/components/navbar";
 
 import Sidebar from "@/components/sidebar";
@@ -19,6 +20,7 @@ const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
       <main className="md:pl-72 pb-10">
         <Navbar />
         {children}
+        <FooterBar />
       </main>
     </div>
   );
