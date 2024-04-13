@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import ModalProvider from "@/components/modal-provider";
+import FooterBar from "@/components/footerBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
