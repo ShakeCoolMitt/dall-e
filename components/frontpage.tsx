@@ -52,7 +52,7 @@ export default function FrontPage() {
                 VectoAI Icon Generator
               </h1>
               <p className="max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                Access a library of beautiful icons to use in your projects.
+                Generate beautiful icons from prompts using AI
               </p>
             </div>
             <div className="mx-auto rounded-xl border border-gray-100/70 overflow-hidden shadow-sm dark:border-gray-800/70">
