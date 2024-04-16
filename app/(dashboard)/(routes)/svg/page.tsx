@@ -55,6 +55,7 @@ const ImagePage = () => {
   const [images, setImages] = useState<string[]>([]);
   const [color, setColor] = useState("");
   const [style, setStyleOptions] = useState(styleOptions[2].value);
+  const [urls, setUrls] = useState<string[]>([]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -78,7 +79,11 @@ const ImagePage = () => {
 
       const urls = response.data;
       setImages(urls);
+      const response2 = await axios.post("/api/icons", urls);
+      setUrls(response2.data);
+
       console.log(urls);
+
       form.reset();
     } catch (error: any) {
       if (error?.response?.status === 403) {
