@@ -59,9 +59,9 @@ export default function FrontPage() {
               <Image
                 alt="Preview"
                 className="object-cover object-center"
-                height="338"
+                height="238"
                 src="/logo.png"
-                width="600"
+                width="400"
               />
             </div>
 
