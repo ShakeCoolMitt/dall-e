@@ -8,10 +8,6 @@ export async function POST(req: Request) {
   const iconUrl = await req.json();
 
   try {
-    if (!userId) {
-      return NextResponse.json({ message: "Unauthorized" });
-    }
-
     const icons = await prismadb.pastIcons.createMany({
       data: iconUrl.map((iconUrl: string) => ({
         userId: userId as string,

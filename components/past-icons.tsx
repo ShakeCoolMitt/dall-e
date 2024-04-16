@@ -49,7 +49,7 @@ export default function PastIcons() {
         <div className="grid gap-4 sm:gap-6 lg:gap-10 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {icons.map((icon) => (
             <Link
-              className="inline-flex flex-col items-center p-2 rounded-md border border-gray-200 bg-white shadow-sm hover:shadow transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 dark:border-gray-800 dark:bg-gray-950 dark:hover:shadow dark:hover:scale-105 dark:focus-visible:ring-gray-300"
+              className="px-8 py-8 inline-flex flex-col items-center p-2 rounded-md border border-gray-200 bg-white shadow-sm hover:shadow transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 dark:border-gray-800 dark:bg-gray-950 dark:hover:shadow dark:hover:scale-105 dark:focus-visible:ring-gray-300"
               href="#"
               key={icon.id}
             >
@@ -64,12 +64,11 @@ export default function PastIcons() {
                 Icon Name
               </span>
               <div className="flex gap-2 mt-2">
-                <Button size="sm" variant="outline">
-                  Download
-                </Button>
-                <Button size="sm" variant="outline">
-                  Delete
-                </Button>
+                <Link href={icon.iconUrl ?? ""}>
+                  <Button size="sm" variant="outline">
+                    Download
+                  </Button>
+                </Link>
               </div>
             </Link>
           ))}
