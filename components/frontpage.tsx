@@ -122,7 +122,7 @@ export default function FrontPage() {
               </div>
               <div className="mx-auto grid grid-cols-2 items-center justify-center gap-4">
                 <CheckCircleIcon className="h-10 w-10 text-gray-500" />
-                <p className="text-gray-500">Export Icons as SVG</p>
+                <p className="text-gray-500">Download your generated Icons</p>
               </div>
             </div>
           </div>
