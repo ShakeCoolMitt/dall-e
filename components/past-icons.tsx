@@ -25,7 +25,15 @@ export default function PastIcons() {
         if (!Array.isArray(data.icons)) {
           throw new Error("Data format error, expected an array");
         }
-        setIcons(data.icons);
+        // Filter icons to show only those created in the last 24 hours
+        const recentIcons = data.icons.filter((icon: any) => {
+          const createdAt = new Date(icon.createdAt); // Ensure createdAt is a Date object
+          const oneDayAgo = new Date(
+            new Date().getTime() - 24 * 60 * 60 * 1000
+          ); // Time 24 hours ago
+          return createdAt > oneDayAgo;
+        });
+        setIcons(recentIcons);
       } catch (error) {
         console.error("Fetching error:", error);
         // Handle error state in UI as needed
