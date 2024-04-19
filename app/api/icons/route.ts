@@ -54,3 +54,50 @@ export async function GET(req: Request) {
     );
   }
 }
+export async function DELETE(req: Request) {
+  // Authenticate the user and obtain the userId
+  const { userId } = auth();
+  if (!userId) {
+    return new NextResponse("Unauthorized", { status: 401 });
+  }
+
+  // Parse the request body to get the icon ID to be deleted
+  const { iconId } = await req.json();
+  if (!iconId) {
+    return NextResponse.json(
+      { message: "Icon ID is required" },
+      { status: 400 }
+    );
+  }
+
+  try {
+    // Verify the icon belongs to the user
+    const icon = await prismadb.pastIcons.findUnique({
+      where: {
+        id: iconId,
+      },
+    });
+
+    if (!icon || icon.userId !== userId) {
+      return NextResponse.json(
+        { message: "Icon not found or access denied" },
+        { status: 404 }
+      );
+    }
+
+    // Proceed to delete the icon
+    await prismadb.pastIcons.delete({
+      where: {
+        id: iconId,
+      },
+    });
+
+    return NextResponse.json({ message: "Icon deleted successfully" });
+  } catch (err) {
+    console.log(err);
+    return NextResponse.json(
+      { message: "Internal server error" },
+      { status: 500 }
+    );
+  }
+}

@@ -25,15 +25,7 @@ export default function PastIcons() {
         if (!Array.isArray(data.icons)) {
           throw new Error("Data format error, expected an array");
         }
-        // Filter icons to show only those created in the last 24 hours
-        const recentIcons = data.icons.filter((icon: any) => {
-          const createdAt = new Date(icon.createdAt); // Ensure createdAt is a Date object
-          const oneDayAgo = new Date(
-            new Date().getTime() - 24 * 60 * 60 * 1000
-          ); // Time 24 hours ago
-          return createdAt > oneDayAgo;
-        });
-        setIcons(recentIcons);
+        setIcons(data.icons);
       } catch (error) {
         console.error("Fetching error:", error);
         // Handle error state in UI as needed
@@ -41,6 +33,25 @@ export default function PastIcons() {
     }
     fetchIcons();
   }, []);
+
+  const deleteIcon = async (id: any) => {
+    try {
+      const response = await fetch("/api/icons", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ iconId: id }), // Send the icon ID in the body
+      });
+      if (!response.ok) {
+        throw new Error("Failed to delete icon: " + (await response.text()));
+      }
+      setIcons((prevIcons) => prevIcons.filter((icon) => icon.id !== id));
+    } catch (error) {
+      console.error("Deletion error:", error);
+      // Optionally handle UI feedback for failure
+    }
+  };
 
   return (
     <section className="w-full py-12 lg:py-16">
@@ -77,6 +88,15 @@ export default function PastIcons() {
                     Download
                   </Button>
                 </Link>
+                <Button
+                  onClick={() => {
+                    deleteIcon(icon.id);
+                  }}
+                  size="sm"
+                  variant="outline"
+                >
+                  Delete
+                </Button>
               </div>
             </Link>
           ))}
