@@ -27,15 +27,10 @@ export async function GET(req: Request) {
     return new NextResponse("Unauthorized", { status: 401 });
   }
 
-  const oneDayAgo = new Date(new Date().getTime() - 24 * 60 * 60 * 1000);
-
   try {
     const icons = await prismadb.pastIcons.findMany({
       where: {
         userId: userId, // Ensure icons are fetched for the logged-in user
-        createdAt: {
-          gt: oneDayAgo, // Only icons created in the last 24 hours
-        },
       },
       select: {
         id: true,
