@@ -24,12 +24,12 @@ export default function Examples() {
                   alt="Icon"
                   className="aspect-square overflow-hidden rounded-lg object-cover object-center"
                   height="200"
-                  src="/example1.png"
+                  src="/ex1.png"
                   width="200"
                 />
-                <h3 className="text-lg font-bold">Rocket</h3>
+                <h3 className="text-lg font-bold">Characters</h3>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
-                  Icon for launching your app
+                  Creating characters
                 </p>
               </div>
               <div className="flex flex-col items-center gap-2">
@@ -37,12 +37,12 @@ export default function Examples() {
                   alt="Icon"
                   className="aspect-square overflow-hidden rounded-lg object-cover object-center"
                   height="200"
-                  src="/example1.png"
+                  src="/ex2.png"
                   width="200"
                 />
-                <h3 className="text-lg font-bold">Coffee</h3>
+                <h3 className="text-lg font-bold">Logo</h3>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
-                  Icon for your morning brew
+                  Icon for your new company
                 </p>
               </div>
               <div className="flex flex-col items-center gap-2">
@@ -50,12 +50,12 @@ export default function Examples() {
                   alt="Icon"
                   className="aspect-square overflow-hidden rounded-lg object-cover object-center"
                   height="200"
-                  src="/example1.png"
+                  src="/ex3.png"
                   width="200"
                 />
-                <h3 className="text-lg font-bold">Umbrella</h3>
+                <h3 className="text-lg font-bold">Neon</h3>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
-                  Icon for rainy days
+                  Icon for a neon style
                 </p>
               </div>
             </div>
